@@ -40,3 +40,11 @@ Run the automated benchmark script:
 ```bash
 chmod +x run_benchmarks.sh
 ./run_benchmarks.sh
+
+## Additional Resources & References
+- **GNU GCC Documentation — Options That Control Optimization (`-O0` vs. `-O3`):** [https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html) — Used to understand how `-O3` enables loop unrolling, register allocation, SIMD vectorization, and dead-code elimination compared to unoptimized `-O0` builds.
+- **Linux Programmer's Manual — `clock_gettime(3)` (`CLOCK_MONOTONIC`):** [https://man7.org/linux/man-pages/man3/clock_gettime.3.html](https://man7.org/linux/man-pages/man3/clock_gettime.3.html) — Used to implement nanosecond-resolution monotonic wall-clock timing in `matrix_multiplication.c` without being affected by system clock adjustments or process startup overhead.
+- **Python Standard Library — `time.perf_counter()`:** [https://docs.python.org/3/library/time.html#time.perf_counter](https://docs.python.org/3/library/time.html#time.perf_counter) — Used to measure high-resolution elapsed execution time in `matrix_multiplication.py` on the same scale as C's monotonic timer.
+- **Python Standard Library — `statistics.median()`:** [https://docs.python.org/3/library/statistics.html#statistics.median](https://docs.python.org/3/library/statistics.html#statistics.median) — Used to aggregate multi-trial benchmark runs into a median runtime that resists single-run OS scheduling spikes.
+- **Python/C API Documentation — `PyObject` Memory Layout:** [https://docs.python.org/3/c-api/structures.html](https://docs.python.org/3/c-api/structures.html) — Referenced to explain why Python `float` objects inside nested lists require significantly more heap memory and pointer indirection than contiguous 8-byte `double` arrays in C.
+- **NumPy Documentation — `numpy.matmul` & BLAS Backends:** [https://numpy.org/doc/stable/reference/generated/numpy.matmul.html](https://numpy.org/doc/stable/reference/generated/numpy.matmul.html) — Referenced to explain how production Python workflows bypass Pure Python loop overhead by calling pre-compiled C/Fortran linear algebra routines.
